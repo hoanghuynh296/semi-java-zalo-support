@@ -59,19 +59,19 @@ class SemiZaloConverter<O>(var clazz: Class<O>) : Converter.Factory() {
                     else res.optString("message")
                     return ZaloResponse(
                             code = res.optInt("error"),
-                            message = msg    
+                            message = msg
                     )
                 }
                 var paging: ZaloResponse.Paging? = null
                 if (res.has("paging"))
-                    paging = Gson().fromJson<ZaloResponse.Paging>(res.optJSONObject("paging").toString(), ZaloResponse.Paging::class.java)
+                    paging = Gson().fromJson<ZaloResponse.Paging>(res.optString("paging"), ZaloResponse.Paging::class.java)
 
                 var sum: ZaloResponse.Summary? = null
                 if (res.has("summary"))
-                    sum = Gson().fromJson<ZaloResponse.Summary>(res.optJSONObject("summary").toString(), ZaloResponse.Summary::class.java)
+                    sum = Gson().fromJson<ZaloResponse.Summary>(res.optString("summary"), ZaloResponse.Summary::class.java)
                 val data: O?
                 data = if (res.has("data"))
-                    Gson().fromJson<O>(res.optJSONObject("data").toString(), clazz)
+                    Gson().fromJson<O>(res.optString("data"), clazz)
                 else
                     Gson().fromJson<O>(res.toString(), clazz)
                 return ZaloResponse(
