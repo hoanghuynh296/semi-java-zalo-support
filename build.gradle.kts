@@ -7,17 +7,22 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * For more details take a look at the Java Libraries chapter in the Gradle
  * User Manual available at https://docs.gradle.org/5.4.1/userguide/java_library_plugin.html
  */
+group = "com.github.hoanghuynh296"
 
 plugins {
     // Apply the java-library plugin to add support for Java Library
     `java-library`
     kotlin("jvm") version "1.3.31"
 }
-
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor(0, "seconds")
+}
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
+    maven(url = "https://jitpack.io")
 }
 
 dependencies {
