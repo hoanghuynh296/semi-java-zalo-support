@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * User Manual available at https://docs.gradle.org/5.4.1/userguide/java_library_plugin.html
  */
 group = "com.github.hoanghuynh296"
-
+apply(plugin = "maven")
 plugins {
     // Apply the java-library plugin to add support for Java Library
     `java-library`
