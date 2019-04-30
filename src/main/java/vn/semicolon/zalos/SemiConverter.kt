@@ -52,9 +52,14 @@ class SemiZaloConverter<O>(var clazz: Class<O>) : Converter.Factory() {
             value?.string().apply {
                 val res = JSONObject(this)
                 if (res.has("error")) {
+                    val msg = if (res.has("error_description"))
+                        res.optString("error_description")
+                    else if (res.has("error_name"))
+                        res.optString("error_name")
+                    else res.optString("message")
                     return ZaloResponse(
                             code = res.optInt("error"),
-                            message = res.optString("message")
+                            message = msg    
                     )
                 }
                 var paging: ZaloResponse.Paging? = null
@@ -78,3 +83,4 @@ class SemiZaloConverter<O>(var clazz: Class<O>) : Converter.Factory() {
         }
     }
 }
+
